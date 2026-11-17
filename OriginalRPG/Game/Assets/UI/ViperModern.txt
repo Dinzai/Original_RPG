@@ -1,0 +1,390 @@
+// VIPER MODERN - texture-free dark editor theme for TGUI 1.x
+// Charcoal surfaces / teal active states / soft white text.
+// Install: Assets/UI/ViperModern.txt
+// Call after GUI initialization, BEFORE creating widgets:
+// tgui::Theme::setDefault("Assets/UI/ViperModern.txt");
+// Optional styles: PrimaryButton, DangerButton, HeadingLabel, MutedLabel.
+// Example: tgui::Theme theme{"Assets/UI/ViperModern.txt"};
+// saveButton->setRenderer(theme.getRenderer("PrimaryButton"));
+// Suggested layout: 16px text, 36px controls, 12px gaps, 16px panel margins.
+// Set these dimensions in C++; a renderer theme does not rearrange widgets.
+// No font or texture assets required. Uses the GUI's current font.
+// Renderer keys checked against upstream TGUI 1.x source; not runtime-tested.
+
+Button {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BorderColorHover = #9AA9B8;
+    BorderColorDown = #59D9B5;
+    BorderColorFocused = #59D9B5;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #FFFFFF;
+    TextColorDown = #E6EDF3;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #2A333E;
+    BackgroundColorHover = #34424F;
+    BackgroundColorDown = #234F49;
+    BackgroundColorDisabled = #20262E;
+}
+
+BitmapButton {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BorderColorHover = #9AA9B8;
+    BorderColorDown = #59D9B5;
+    BorderColorFocused = #59D9B5;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #FFFFFF;
+    TextColorDown = #E6EDF3;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #2A333E;
+    BackgroundColorHover = #34424F;
+    BackgroundColorDown = #234F49;
+    BackgroundColorDisabled = #20262E;
+}
+
+ToggleButton {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BorderColorHover = #9AA9B8;
+    BorderColorDown = #59D9B5;
+    BorderColorFocused = #59D9B5;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #FFFFFF;
+    TextColorDown = #59D9B5;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #2A333E;
+    BackgroundColorHover = #34424F;
+    BackgroundColorDown = #234F49;
+    BackgroundColorDisabled = #20262E;
+    BackgroundColorDownHover = #2C6359;
+}
+
+PrimaryButton {
+    Borders = 1;
+    BorderColor = #59D9B5;
+    TextColor = #10241F;
+    BorderColorHover = #9AA9B8;
+    BorderColorDown = #59D9B5;
+    BorderColorFocused = #FFFFFF;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #10241F;
+    TextColorDown = #10241F;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #59D9B5;
+    BackgroundColorHover = #7DE6C8;
+    BackgroundColorDown = #38B993;
+    BackgroundColorDisabled = #20262E;
+}
+
+DangerButton {
+    Borders = 1;
+    BorderColor = #A96776;
+    TextColor = #FFADB4;
+    BorderColorHover = #9AA9B8;
+    BorderColorDown = #59D9B5;
+    BorderColorFocused = #FFADB4;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #FFFFFF;
+    TextColorDown = #E6EDF3;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #442B34;
+    BackgroundColorHover = #653540;
+    BackgroundColorDown = #7A3442;
+    BackgroundColorDisabled = #20262E;
+}
+
+Label {
+    TextColor = #E6EDF3;
+    BackgroundColor = Transparent;
+}
+
+MutedLabel {
+    TextColor = #9AA9B8;
+    BackgroundColor = Transparent;
+}
+
+HeadingLabel {
+    TextColor = #FFFFFF;
+    TextStyle = Bold;
+    BackgroundColor = Transparent;
+}
+
+Panel {
+    Borders = 0;
+    BackgroundColor = #20262E;
+    BorderColor = #526170;
+}
+
+ScrollablePanel {
+    Borders = 0;
+    BackgroundColor = #20262E;
+    BorderColor = #526170;
+    Scrollbar = &Scrollbar;
+}
+
+CheckBox {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BorderColorHover = #59D9B5;
+    BorderColorFocused = #59D9B5;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #FFFFFF;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #171C23;
+    BackgroundColorHover = #2A333E;
+    BackgroundColorDisabled = #20262E;
+    CheckColor = #59D9B5;
+    CheckColorHover = #7DE6C8;
+    CheckColorDisabled = #75818E;
+    TextDistanceRatio = 0.3;
+}
+
+RadioButton {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BorderColorHover = #59D9B5;
+    BorderColorFocused = #59D9B5;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #FFFFFF;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #171C23;
+    BackgroundColorHover = #2A333E;
+    BackgroundColorDisabled = #20262E;
+    CheckColor = #59D9B5;
+    CheckColorHover = #7DE6C8;
+    CheckColorDisabled = #75818E;
+    TextDistanceRatio = 0.3;
+}
+
+EditBox {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    Padding = (10, 6, 10, 6);
+    BackgroundColor = #171C23;
+    BackgroundColorHover = #1D252E;
+    BackgroundColorDisabled = #20262E;
+    TextColorDisabled = #75818E;
+    BorderColorHover = #9AA9B8;
+    BorderColorFocused = #59D9B5;
+    BorderColorDisabled = #39434E;
+    DefaultTextColor = #9AA9B8;
+    CaretColor = #59D9B5;
+    CaretWidth = 2;
+    SelectedTextColor = #FFFFFF;
+    SelectedTextBackgroundColor = #234F49;
+}
+
+TextArea {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    Padding = 10;
+    BackgroundColor = #171C23;
+    DefaultTextColor = #9AA9B8;
+    CaretColor = #59D9B5;
+    CaretWidth = 2;
+    SelectedTextColor = #FFFFFF;
+    SelectedTextBackgroundColor = #234F49;
+    Scrollbar = &Scrollbar;
+}
+
+ListBox {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    Padding = 4;
+    BackgroundColor = #171C23;
+    BackgroundColorHover = #2A333E;
+    TextColorHover = #FFFFFF;
+    SelectedTextColor = #FFFFFF;
+    SelectedBackgroundColor = #234F49;
+    SelectedBackgroundColorHover = #2C6359;
+    Scrollbar = &Scrollbar;
+}
+
+TreeView {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    Padding = 4;
+    BackgroundColor = #171C23;
+    BackgroundColorHover = #2A333E;
+    TextColorHover = #FFFFFF;
+    SelectedTextColor = #FFFFFF;
+    SelectedBackgroundColor = #234F49;
+    SelectedBackgroundColorHover = #2C6359;
+    Scrollbar = &Scrollbar;
+}
+
+ListView {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    Padding = 4;
+    BackgroundColor = #171C23;
+    BackgroundColorHover = #2A333E;
+    TextColorHover = #FFFFFF;
+    SelectedTextColor = #FFFFFF;
+    SelectedBackgroundColor = #234F49;
+    SelectedBackgroundColorHover = #2C6359;
+    Scrollbar = &Scrollbar;
+    HeaderBackgroundColor = #2A333E;
+    HeaderTextColor = #E6EDF3;
+    SeparatorColor = #39434E;
+}
+
+ComboBox {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    Padding = (10, 6, 10, 6);
+    BackgroundColor = #171C23;
+    BackgroundColorDisabled = #20262E;
+    TextColorDisabled = #75818E;
+    ArrowColor = #9AA9B8;
+    ArrowColorHover = #59D9B5;
+    ArrowBackgroundColor = #171C23;
+    ArrowBackgroundColorHover = #2A333E;
+    ListBox = &ListBox;
+}
+
+MenuBar {
+    TextColor = #E6EDF3;
+    TextColorDisabled = #75818E;
+    SelectedTextColor = #FFFFFF;
+    BackgroundColor = #20262E;
+    SelectedBackgroundColor = #234F49;
+    SeparatorColor = #39434E;
+    SeparatorThickness = 1;
+    SeparatorVerticalPadding = 6;
+    DistanceToSide = 12;
+}
+
+ChildWindow {
+    Borders = 1;
+    BorderColor = #526170;
+    TitleColor = #E6EDF3;
+    TitleBarColor = #2A333E;
+    BackgroundColor = #20262E;
+    DistanceToSide = 10;
+    BorderBelowTitleBar = 1;
+    PaddingBetweenButtons = 4;
+    ShowTextOnTitleButtons = true;
+    CloseButton = &WindowCloseButton;
+    MaximizeButton = &Button;
+    MinimizeButton = &Button;
+}
+
+WindowCloseButton {
+    Borders = 0;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BorderColorHover = #9AA9B8;
+    BorderColorDown = #59D9B5;
+    BorderColorFocused = #59D9B5;
+    BorderColorDisabled = #39434E;
+    TextColorHover = #FFFFFF;
+    TextColorDown = #E6EDF3;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #2A333E;
+    BackgroundColorHover = #783846;
+    BackgroundColorDown = #A34351;
+    BackgroundColorDisabled = #20262E;
+}
+
+MessageBox {
+    Borders = 1;
+    BorderColor = #526170;
+    TitleColor = #E6EDF3;
+    TitleBarColor = #2A333E;
+    BackgroundColor = #20262E;
+    DistanceToSide = 10;
+    BorderBelowTitleBar = 1;
+    PaddingBetweenButtons = 4;
+    ShowTextOnTitleButtons = true;
+    CloseButton = &WindowCloseButton;
+    MaximizeButton = &Button;
+    MinimizeButton = &Button;
+    TextColor = #E6EDF3;
+    Button = &Button;
+}
+
+Scrollbar {
+    TrackColor = #171C23;
+    ThumbColor = #526170;
+    ThumbColorHover = #9AA9B8;
+    ArrowBackgroundColor = #171C23;
+    ArrowBackgroundColorHover = #2A333E;
+    ArrowColor = #9AA9B8;
+    ArrowColorHover = #59D9B5;
+}
+
+Slider {
+    Borders = 1;
+    BorderColor = #526170;
+    BorderColorHover = #59D9B5;
+    TrackColor = #171C23;
+    TrackColorHover = #2A333E;
+    ThumbColor = #59D9B5;
+    ThumbColorHover = #7DE6C8;
+}
+
+RangeSlider {
+    Borders = 1;
+    BorderColor = #526170;
+    BorderColorHover = #59D9B5;
+    TrackColor = #171C23;
+    TrackColorHover = #2A333E;
+    ThumbColor = #59D9B5;
+    ThumbColorHover = #7DE6C8;
+    SelectedTrackColor = #2C6359;
+}
+
+ProgressBar {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BackgroundColor = #171C23;
+    FillColor = #59D9B5;
+    TextColorFilled = #10241F;
+}
+
+SpinButton {
+    Borders = 1;
+    BorderColor = #526170;
+    BackgroundColor = #2A333E;
+    BackgroundColorHover = #34424F;
+    ArrowColor = #E6EDF3;
+    ArrowColorHover = #59D9B5;
+    BorderBetweenArrows = 1;
+}
+
+Tabs {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    TextColorHover = #FFFFFF;
+    TextColorDisabled = #75818E;
+    BackgroundColor = #20262E;
+    BackgroundColorHover = #2A333E;
+    BackgroundColorDisabled = #20262E;
+    SelectedTextColor = #59D9B5;
+    SelectedBackgroundColor = #234F49;
+    SelectedBackgroundColorHover = #2C6359;
+    DistanceToSide = 16;
+}
+
+ToolTip {
+    Borders = 1;
+    BorderColor = #526170;
+    TextColor = #E6EDF3;
+    BackgroundColor = #2A333E;
+    Padding = (10, 8, 10, 8);
+}

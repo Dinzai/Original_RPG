@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{TITLE}}</title>
+<style>
+html,body{margin:0;background:#101719;color:#e8f2ef;height:100%;font:16px system-ui}
+body{display:grid;place-items:center}main{max-width:100%;text-align:center}
+canvas{display:block;margin:0 auto;image-rendering:pixelated;image-rendering:crisp-edges;background:#000;outline:none}
+#status{padding:12px;max-width:850px;white-space:pre-wrap}#status[data-error]{color:#ffaaaa}
+</style></head><body><main><canvas id="game" tabindex="0" aria-label="{{TITLE}}"></canvas><div id="status" role="status">Loading game…</div></main><script type="module" src="./boot.js"></script></body></html>
