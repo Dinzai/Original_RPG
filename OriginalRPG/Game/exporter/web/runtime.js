@@ -1016,13 +1016,20 @@ export class Game {
     if (!this.player?.alive) throw new Error(`${name}: the scene has no player`);
     return this.player;
   }
+  // True while one of the two was stopped by the other on its latest move: what desktop
+  // reports as an overlap in the frame before its collision pass pushes them apart.
+  pushingTogether(a, b) {
+    return a.live && b.live && (a.blockedBy?.has(b) || b.blockedBy?.has(a)) === true;
+  }
   collision_aabb_g_g(lhs, rhs) {
-    return overlapsAABB(aabb(this.requireEntity(lhs, 'collision_aabb_g_g')), aabb(this.requireEntity(rhs, 'collision_aabb_g_g')));
+    const a = this.requireEntity(lhs, 'collision_aabb_g_g'), b = this.requireEntity(rhs, 'collision_aabb_g_g');
+    return overlapsAABB(aabb(a), aabb(b)) || this.pushingTogether(a, b);
   }
   collision_aabb_p_g(generic) {
     const player = this.requirePlayer('collision_aabb_p_g');
+    const g = this.requireEntity(generic, 'collision_aabb_p_g');
     // Desktop reads the player's own frame size and origin, and the scale of its newest view.
-    return overlapsAABB(aabb(player, player.possessView?.scale ?? player.scale), aabb(this.requireEntity(generic, 'collision_aabb_p_g')));
+    return overlapsAABB(aabb(player, player.possessView?.scale ?? player.scale), aabb(g)) || this.pushingTogether(player, g);
   }
   posses(generic) {
     const player = this.requirePlayer('posses');
@@ -1111,6 +1118,10 @@ export class Game {
   }
   move(e, dt, obstacles) {
     let hit = false;
+    // Objects that stopped this move, kept until e's next move. Desktop lets a mover
+    // overlap what it hit for a frame before snapping back, and scripts see that overlap
+    // in collision_aabb_*; here the sweep stops flush, so the AABB checks read this instead.
+    e.blockedBy = new Set();
     // Axis sweep clips travel against walls even at high speed; no tunnelling.
     for (const axis of ['x', 'y']) {
       const size = axis === 'x' ? 'w' : 'h', other = axis === 'x' ? 'y' : 'x', otherSize = axis === 'x' ? 'h' : 'w';
@@ -1121,8 +1132,11 @@ export class Game {
         if (obstacle === e || obstacle.alive === false || obstacle.dead || obstacle.collisionEnabled === false || e.collisionEnabled === false) continue;
         const o = bounds(obstacle);
         if (box.w <= 0 || box.h <= 0 || o.w <= 0 || o.h <= 0 || box[other] >= o[other] + o[otherSize] || box[other] + box[otherSize] <= o[other]) continue;
-        if (wanted > 0 && box[axis] + box[size] <= o[axis]) amount = Math.min(amount, o[axis] - box[axis] - box[size]);
-        if (wanted < 0 && box[axis] >= o[axis] + o[size]) amount = Math.max(amount, o[axis] + o[size] - box[axis]);
+        let limit = wanted;
+        if (wanted > 0 && box[axis] + box[size] <= o[axis]) limit = o[axis] - box[axis] - box[size];
+        if (wanted < 0 && box[axis] >= o[axis] + o[size]) limit = o[axis] + o[size] - box[axis];
+        if (Math.abs(limit) < Math.abs(wanted) - 1e-8) e.blockedBy.add(obstacle);
+        amount = wanted > 0 ? Math.min(amount, limit) : Math.max(amount, limit);
       }
       if (Math.abs(amount - wanted) > 1e-8) hit = true;
       e[axis] += amount;

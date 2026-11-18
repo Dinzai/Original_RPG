@@ -26,8 +26,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": -82.8966064453125,
-                "y": -155.72802734375
+                "x": -43.8966064453125,
+                "y": -55.72802734375
             },
             "script": "Scripts/battleSceneBackgroundScript.py",
             "script_language": "python",

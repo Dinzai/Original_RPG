@@ -17,8 +17,33 @@ const $py = (() => {
   const dict = entries => { const d = new Map(); for (const [k, v] of entries) d.set(key(k), v); return d; };
   const has = (obj, k) => obj instanceof Map ? obj.has(key(k)) : Array.isArray(obj) ? obj.some(v => eq(v, k)) : typeof obj === 'string' && typeof k === 'string' ? obj.includes(k) : fail('TypeError: unsupported membership');
   const index = (obj, k) => { if (typeof k === 'boolean') k = Number(k); if (!Number.isInteger(k)) fail('TypeError: index must be an integer'); const n = k < 0 ? obj.length + k : k; if (n < 0 || n >= obj.length) fail('IndexError: index out of range'); return n; };
-  const get = (obj, k) => { if (obj instanceof Map) { k = key(k); return obj.has(k) ? obj.get(k) : fail(`KeyError: ${k}`); } if (Array.isArray(obj) || typeof obj === 'string') { const a = typeof obj === 'string' ? [...obj] : obj; return a[index(a, k)]; } return fail('TypeError: unsupported subscription'); };
-  const set = (obj, k, v) => { if (obj instanceof Map) obj.set(key(k), v); else if (Array.isArray(obj)) obj[index(obj, k)] = v; else fail('TypeError: unsupported item assignment'); return v; };
+  // Python slices: obj[start:stop:step] for strings and lists (negatives, omitted bounds, any step).
+  const slices = new WeakSet();
+  const slice = (start, stop, step) => { const s = Object.freeze({start, stop, step}); slices.add(s); return s; };
+  const sliceIndex = v => { if (v === null || v === undefined) return null; if (typeof v === 'boolean') v = Number(v); if (!Number.isInteger(v)) fail('TypeError: slice indices must be integers or None'); return v; };
+  const sliceRange = (s, len) => {
+    let step = sliceIndex(s.step); if (step === null) step = 1; if (step === 0) fail('ValueError: slice step cannot be zero');
+    const adjust = (v, fallback) => { v = sliceIndex(v); if (v === null) return fallback; if (v < 0) { v += len; if (v < 0) v = step < 0 ? -1 : 0; } else if (v >= len) v = step < 0 ? len - 1 : len; return v; };
+    const start = adjust(s.start, step < 0 ? len - 1 : 0), stop = adjust(s.stop, step < 0 ? -1 : len);
+    const out = []; for (let i = start; step > 0 ? i < stop : i > stop; i += step) out.push(i);
+    return {start, stop, step, indices: out};
+  };
+  const getSlice = (obj, s) => {
+    const a = typeof obj === 'string' ? [...obj] : obj;
+    const {start, stop, step, indices} = sliceRange(s, a.length);
+    const picked = step === 1 ? a.slice(start, Math.max(start, stop)) : indices.map(i => a[i]);
+    return typeof obj === 'string' ? picked.join('') : picked;
+  };
+  const setSlice = (obj, s, v) => {
+    const values = [...iter(v)];
+    const {start, stop, step, indices} = sliceRange(s, obj.length);
+    if (step === 1) { obj.splice(start, Math.max(0, stop - start), ...values); return v; }
+    if (values.length !== indices.length) fail(`ValueError: attempt to assign sequence of size ${values.length} to extended slice of size ${indices.length}`);
+    indices.forEach((i, n) => { obj[i] = values[n]; });
+    return v;
+  };
+  const get = (obj, k) => { if (slices.has(k)) return Array.isArray(obj) || typeof obj === 'string' ? getSlice(obj, k) : fail('TypeError: unsupported slicing'); if (obj instanceof Map) { k = key(k); return obj.has(k) ? obj.get(k) : fail(`KeyError: ${k}`); } if (Array.isArray(obj) || typeof obj === 'string') { const a = typeof obj === 'string' ? [...obj] : obj; return a[index(a, k)]; } return fail('TypeError: unsupported subscription'); };
+  const set = (obj, k, v) => { if (slices.has(k)) return Array.isArray(obj) ? setSlice(obj, k, v) : fail('TypeError: unsupported slice assignment'); if (obj instanceof Map) obj.set(key(k), v); else if (Array.isArray(obj)) obj[index(obj, k)] = v; else fail('TypeError: unsupported item assignment'); return v; };
   const iter = x => ranges.has(x) ? x[Symbol.iterator]() : x instanceof Map ? x.keys() : Array.isArray(x) || typeof x === 'string' ? x[Symbol.iterator]() : fail('TypeError: unsupported iterable');
   const length = x => x instanceof Map ? x.size : Array.isArray(x) ? x.length : typeof x === 'string' ? [...x].length : fail('TypeError: len expects list, dict or string');
   const add = (a, b) => Array.isArray(a) && Array.isArray(b) ? [...a, ...b] : typeof a === 'string' && typeof b === 'string' ? a + b : num(a) + num(b);
@@ -95,5 +120,5 @@ const $py = (() => {
     Vec2: (...args) => { noArgs('Vec2', args); return { x: 0, y: 0 }; },
     set_runtime_mode: (...args) => { noArgs('set_runtime_mode', args); return null; }
   });
-  return {viper, missing, read, num, truth, eq, dict, has, get, set, iter, length, add, iadd, mul, imul, div, mod, order, range, attr, method, unpack, str, integer, float, minmax};
+  return {viper, missing, read, num, truth, eq, dict, has, get, set, slice, iter, length, add, iadd, mul, imul, div, mod, order, range, attr, method, unpack, str, integer, float, minmax};
 })();

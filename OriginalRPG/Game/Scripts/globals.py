@@ -3,3 +3,7 @@
 turn = 0
 
 can_spawn = False
+
+failed_to_run = "You Failed to run away!"
+
+enemy_attaked_phrase = "The Enemy Attacked!"

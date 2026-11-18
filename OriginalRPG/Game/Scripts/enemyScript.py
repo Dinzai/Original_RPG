@@ -21,6 +21,7 @@ class Behaviour:
         pass
 
     def on_start(self):
+        self.owner.set_origin(self.owner.get_image_size().x() / 2, self.owner.get_image_size().y() / 2)
         self.level = 1
         self.attack = 1
         self.defence = 1

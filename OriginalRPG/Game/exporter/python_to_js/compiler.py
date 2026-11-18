@@ -481,6 +481,10 @@ class Compiler:
             return '$py.dict([' + ', '.join(f'[{self.expr(k)}, {self.expr(v)}]' for k, v in zip(n.keys, n.values)) + '])'
         if isinstance(n, ast.Subscript):
             return f'$py.get({self.expr(n.value)}, {self.expr(n.slice)})'
+        if isinstance(n, ast.Slice):
+            # Python slice a[start:stop:step]; omitted parts become None (null).
+            parts = [self.expr(x) if x is not None else 'null' for x in (n.lower, n.upper, n.step)]
+            return f'$py.slice({", ".join(parts)})'
         if isinstance(n, ast.BinOp):
             return self.binop(n.op, self.expr(n.left), self.expr(n.right), n)
         if isinstance(n, ast.UnaryOp):

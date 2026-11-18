@@ -32,15 +32,36 @@ class Behaviour:
         self.game.ui_set_visible(self.itemMenuID, False)
         self.game.ui_set_visible(self.exitID, False)
         
+    def on_continue_pressed(self):
+        self.game.ui_set_visible(self.battleID, True)
+        self.game.ui_set_visible(self.itemID, True)
+        self.game.ui_set_visible(self.runID, True)
+        self.game.ui_set_visible(self.continueID, False)
+        globals.turn = 0
+                        
+        
+    def play_text(self):
+        self.game.ui_set_visible(self.battleID, False)
+        self.game.ui_set_visible(self.itemID, False)
+        self.game.ui_set_visible(self.runID, False)
+        
     def on_run_pressed(self):
             chance = self.game.get_random_num(1, 3)
             if chance > 1:
                 self.game.load_scene("WORLD")
             else:
                 globals.turn = 1
+                self.game.ui_set_visible(self.battleID, False)
+                self.game.ui_set_visible(self.itemID, False)
+                self.game.ui_set_visible(self.runID, False)
+                self.game.ui_set_visible(self.continueID, True) 
                 
             
     def on_start(self):
+        self.message = globals.failed_to_run
+        self.timer = 0.0
+        self.characters_per_second = 12
+        
         self.owner.set_origin(self.owner.get_image_size().x() / 2, self.owner.get_image_size().y() / 2)
         self.owner.set_scale(3, 3)
         self.game.ui_image(320, 500, 512, 128, "Assets/UIChoiceBar.png")
@@ -51,10 +72,16 @@ class Behaviour:
         self.exitID = self.game.ui_button(645, 525, 128,32, "EXIT", self.on_exit_pressed)
         self.game.ui_set_visible(self.itemMenuID, False)
         self.game.ui_set_visible(self.exitID, False)
+        self.continueID = self.game.ui_button(645, 575, 128,32, "CONTINUE", self.on_continue_pressed)
+        self.game.ui_set_visible(self.continueID, False) 
         
 
     def on_update(self, delta):
-        pass
+        if globals.turn == 1:
+            self.timer += delta
+            characters = int(self.timer * self.characters_per_second)
+            characters = min(characters, len(self.message))
+            self.game.draw_text(self.message[:characters], 345, 525, 20, [0,0,0])
 
     def on_click(self):
         pass
