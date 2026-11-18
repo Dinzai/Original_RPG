@@ -10,7 +10,7 @@
             "audio": {
                 "sfx": []
             },
-            "id": 1576,
+            "id": 3,
             "layer": {
                 "layerValue": "BACKGROUND"
             },
@@ -26,8 +26,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": -43.8966064453125,
-                "y": -55.72802734375
+                "x": 12.1033935546875,
+                "y": -67.72802734375
             },
             "script": "Scripts/battleSceneBackgroundScript.py",
             "script_language": "python",
@@ -47,6 +47,112 @@
                 "speed": 0.0,
                 "type": "battleScene",
                 "xFrame": 1,
+                "yFrame": 1
+            },
+            "tags": [],
+            "trigger": {
+                "active": true,
+                "enabled": false
+            },
+            "type": "Generic"
+        },
+        {
+            "ai": {
+                "mode": "EMPTY"
+            },
+            "audio": {
+                "sfx": []
+            },
+            "id": 4,
+            "layer": {
+                "layerValue": "ENTITY"
+            },
+            "movementFrames": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                11
+            ],
+            "name": "Generic",
+            "position": {
+                "x": 251.33538818359375,
+                "y": -171.66537475585938
+            },
+            "script": "Scripts/enemyFrontSpriteScript.py",
+            "script_language": "python",
+            "shape": {
+                "colour": [
+                    210.0,
+                    210.0,
+                    210.0,
+                    255.0
+                ],
+                "height": 20.0,
+                "width": 20.0
+            },
+            "sprite": {
+                "animTime": 0.5,
+                "file": "Assets/basicEnemyFrontSprite.png",
+                "speed": 0.0,
+                "type": "enemyFront",
+                "xFrame": 3,
+                "yFrame": 1
+            },
+            "tags": [],
+            "trigger": {
+                "active": true,
+                "enabled": false
+            },
+            "type": "Generic"
+        },
+        {
+            "ai": {
+                "mode": "EMPTY"
+            },
+            "audio": {
+                "sfx": []
+            },
+            "id": 5,
+            "layer": {
+                "layerValue": "ENTITY"
+            },
+            "movementFrames": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                11
+            ],
+            "name": "Generic",
+            "position": {
+                "x": -204.0,
+                "y": -3.1232247352600098
+            },
+            "script": "Scripts/playerBackSpriteScript.py",
+            "script_language": "python",
+            "shape": {
+                "colour": [
+                    210.0,
+                    210.0,
+                    210.0,
+                    255.0
+                ],
+                "height": 20.0,
+                "width": 20.0
+            },
+            "sprite": {
+                "animTime": 0.4000000059604645,
+                "file": "Assets/playerBackSprite.png",
+                "speed": 0.0,
+                "type": "playerBack",
+                "xFrame": 3,
                 "yFrame": 1
             },
             "tags": [],

@@ -22,9 +22,6 @@ class Behaviour:
 
     def on_start(self):
         self.owner.set_origin(self.owner.get_image_size().x() / 2, self.owner.get_image_size().y() / 2)
-        self.level = 1
-        self.attack = 1
-        self.defence = 1
         self.owner.add_tag("ENEMY")
         self.owner.set_movement_frames(0,3,0,3,0,3,0,3)
 
