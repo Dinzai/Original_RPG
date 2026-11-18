@@ -44,15 +44,17 @@ class Behaviour:
             #battle menu
             self.timer = 0
             globals.turn = 0
-        elif globals.turn == 3:
+        elif globals.turn == 3 and globals.enemy_was_damaged == False:
             self.timer = 0
             self.message = globals.enemy_damaged
-            globals.turn = 4
+            globals.enemy_health_bar_size -= 42
+            globals.enemy_was_damaged = True
+            self.game.ui_set_size(self.enemyHealthTop , globals.enemy_health_bar_size, 16)
         elif globals.turn == 4:
             self.timer = 0
             self.message = globals.enemy_attaked_phrase
             globals.turn = 5
-        elif globals.turn == 5:
+        elif globals.turn == 5 and globals.player_was_damaged == False:
             self.timer = 0
             self.message = globals.player_damaged
             #the health is 10, the bar is 140, -14 in the bar is - 1 in the hp
@@ -61,6 +63,9 @@ class Behaviour:
             globals.player_was_damaged = True
             self.game.ui_set_size(self.playerHealthTop , globals.player_health_bar_size, 16)
             self.timer = 0
+        elif globals.turn == 6:
+            self.timer = 0
+            self.game.load_scene("WORLD")
             
 
                         
@@ -84,9 +89,15 @@ class Behaviour:
                 
             
     def on_start(self):
+        #reset enemy
+        globals.enemy_current_health = 10
+        globals.enemy_health_bar_size = 140
         
         self.playerHealthBottom = self.game.ui_panel(232,200,160,32,[31,0,29])
         self.playerHealthTop = self.game.ui_panel(240,208,globals.player_health_bar_size,16,[150,156,145])
+        
+        self.enemyHealthBottom = self.game.ui_panel(632,200,160,32,[31,0,29])
+        self.enemyHealthTop = self.game.ui_panel(640,208,globals.enemy_health_bar_size,16,[150,156,145])
         
         self.game.set_camera_zoom(0.75)
         self.game.remove_collision(self.owner)
@@ -113,6 +124,27 @@ class Behaviour:
         
 
     def on_update(self, delta):
+        
+        self.game.draw_text("HP: " + str(globals.enemy_current_health), 600, 180, 20, [31,0,29])
+        if globals.enemy_was_damaged == True and globals.turn == 3:
+            if globals.enemy_health_bar_size_bottom > globals.enemy_health_bar_size - 20:
+                globals.enemy_health_bar_size_bottom -= 30 * delta
+                self.game.ui_set_size(self.enemyHealthBottom , globals.enemy_health_bar_size_bottom, 32)
+                if globals.enemy_health_bar_size_bottom <= globals.enemy_health_bar_size + 20:    
+                    globals.enemy_health_bar_size_bottom = globals.enemy_health_bar_size + 20
+                    globals.enemy_current_health -= 3
+                    if globals.enemy_current_health <= 0:
+                        globals.enemy_current_health = 0
+                        globals.turn = 6
+                        self.timer = 0
+                        self.message = globals.you_win
+                        globals.enemy_was_damaged = False
+                        return
+                    self.game.ui_set_size(self.enemyHealthBottom , globals.enemy_health_bar_size_bottom, 32)
+                    globals.turn = 4
+                    globals.enemy_was_damaged = False
+
+        
         self.game.draw_text("HP: " + str(globals.player_current_health), 240, 180, 20, [31,0,29])
         if globals.player_was_damaged == True and globals.turn == 5:
             if globals.player_health_bar_size_bottom > globals.player_health_bar_size - 20:
@@ -124,6 +156,8 @@ class Behaviour:
                     self.game.ui_set_size(self.playerHealthBottom , globals.player_health_bar_size_bottom, 32)
                     globals.turn = 1
                     globals.player_was_damaged = False
+        
+            
                     
         if globals.turn >= 1:
             self.timer += delta
@@ -136,3 +170,4 @@ class Behaviour:
 
     def on_action(self):
         pass
+

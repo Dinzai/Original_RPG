@@ -79,8 +79,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": 251.33538818359375,
-                "y": -171.66537475585938
+                "x": 251.0,
+                "y": -171.0
             },
             "script": "Scripts/enemyFrontSpriteScript.py",
             "script_language": "python",
@@ -133,7 +133,7 @@
             "name": "Generic",
             "position": {
                 "x": -204.0,
-                "y": -3.1232247352600098
+                "y": -4.8276166915893555
             },
             "script": "Scripts/playerBackSpriteScript.py",
             "script_language": "python",

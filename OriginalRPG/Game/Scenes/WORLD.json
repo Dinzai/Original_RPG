@@ -609,8 +609,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": 50.47182083129883,
-                "y": -244.60791015625
+                "x": -26.84217643737793,
+                "y": -341.976806640625
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
@@ -664,8 +664,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": -107.37684631347656,
-                "y": -55.77873229980469
+                "x": -139.99154663085938,
+                "y": -198.9737548828125
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
@@ -719,7 +719,7 @@
             ],
             "name": "Generic",
             "position": {
-                "x": -634.6249389648438,
+                "x": -465.724365234375,
                 "y": -51.74709701538086
             },
             "script": "Scripts/enemyScript.py",
@@ -775,7 +775,7 @@
             "name": "Generic",
             "position": {
                 "x": 21.748958587646484,
-                "y": -153.97715759277344
+                "y": -330.87786865234375
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
@@ -830,7 +830,7 @@
             "name": "Generic",
             "position": {
                 "x": -1188.6844482421875,
-                "y": -51.04511642456055
+                "y": -48.79338455200195
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
@@ -884,8 +884,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": 283.1362609863281,
-                "y": 68.0137939453125
+                "x": 184.92416381835938,
+                "y": -6.292442798614502
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
@@ -939,8 +939,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": 612.3208618164063,
-                "y": -735.0833129882813
+                "x": 506.5304870605469,
+                "y": -799.81103515625
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
@@ -994,8 +994,8 @@
             ],
             "name": "Generic",
             "position": {
-                "x": -547.7107543945313,
-                "y": -60.43849563598633
+                "x": -385.9989013671875,
+                "y": -51.63575744628906
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
@@ -1050,7 +1050,7 @@
             "name": "Generic",
             "position": {
                 "x": 309.28680419921875,
-                "y": -52.761234283447266
+                "y": 124.13948822021484
             },
             "script": "Scripts/enemyScript.py",
             "script_language": "python",
