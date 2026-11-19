@@ -10,7 +10,7 @@
             "audio": {
                 "sfx": []
             },
-            "id": 3,
+            "id": 12074,
             "layer": {
                 "layerValue": "BACKGROUND"
             },
@@ -63,7 +63,7 @@
             "audio": {
                 "sfx": []
             },
-            "id": 4,
+            "id": 12075,
             "layer": {
                 "layerValue": "ENTITY"
             },
@@ -116,7 +116,7 @@
             "audio": {
                 "sfx": []
             },
-            "id": 5,
+            "id": 12076,
             "layer": {
                 "layerValue": "ENTITY"
             },
@@ -133,7 +133,7 @@
             "name": "Generic",
             "position": {
                 "x": -204.0,
-                "y": -4.8276166915893555
+                "y": -16.348957061767578
             },
             "script": "Scripts/playerBackSpriteScript.py",
             "script_language": "python",

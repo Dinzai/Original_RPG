@@ -1,0 +1,61 @@
+{
+    "audio": {
+        "music": []
+    },
+    "generics": [
+        {
+            "ai": {
+                "mode": "EMPTY"
+            },
+            "audio": {
+                "sfx": []
+            },
+            "id": 3,
+            "layer": {
+                "layerValue": "BACKGROUND"
+            },
+            "movementFrames": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                11
+            ],
+            "name": "Generic",
+            "position": {
+                "x": -58.0,
+                "y": -74.5
+            },
+            "script": "Scripts/guideBackGroundScript.py",
+            "script_language": "python",
+            "shape": {
+                "colour": [
+                    210.0,
+                    210.0,
+                    210.0,
+                    255.0
+                ],
+                "height": 20.0,
+                "width": 20.0
+            },
+            "sprite": {
+                "animTime": 1.0,
+                "file": "Assets/UIHealthBarEmpty.png",
+                "speed": 0.0,
+                "type": "uiGuideB",
+                "xFrame": 1,
+                "yFrame": 1
+            },
+            "tags": [],
+            "trigger": {
+                "active": true,
+                "enabled": false
+            },
+            "type": "Generic"
+        }
+    ],
+    "maps": []
+}

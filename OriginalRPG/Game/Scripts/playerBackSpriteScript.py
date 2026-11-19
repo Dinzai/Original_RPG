@@ -26,7 +26,7 @@ class Behaviour:
 
 
     def on_update(self, delta):
-        self.owner.play_anim(0, 3)
+        self.owner.play_anim(0, 2)
         self.timer += delta
         if self.timer >= 0 and self.timer < 3:
             self.maxY += 10 * delta

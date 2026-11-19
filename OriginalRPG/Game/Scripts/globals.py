@@ -19,6 +19,17 @@ failed_to_run = "You Failed to run away!"
 
 you_win = "You Won!"
 
+you_lose = "You Lost?!"
+
+light_color = [150,156,145]
+dark_color = [31,0,29]
+
+player_start_pos = 0
+
+enemy_intangible_after_run = False
+
+player_current_pos_x = 0
+player_current_pos_y = 0
 
 player_was_damaged = False
 

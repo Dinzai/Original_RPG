@@ -24,7 +24,7 @@ class Behaviour:
         self.game.remove_collision(self.owner)
 
     def on_update(self, delta):
-        self.owner.play_anim(0, 3)
+        self.owner.play_anim(0, 2)
         if globals.enemy_current_health <= 0:
             self.owner.play_anim(0, 0)
             self.y += 2000 * delta
